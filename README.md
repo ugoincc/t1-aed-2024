@@ -3,5 +3,4 @@ O programa tem como objetivo gerenciar estoques de livros utilizando listas enca
 O programa não possui interface gráfica e foi desenvolvido na linguagem C.
 
 Autores:
-Hugo Gustavo Cordeiro
-Diogo Ferreira Ribeiro
+Hugo Gustavo Cordeiro e Diogo Ferreira Ribeiro.
