@@ -1,58 +1,100 @@
-Primeiro Trabalho da disciplina "Algoritmos e Estruturas de Dados".
-O programa tem como objetivo gerenciar estoques de livros utilizando listas encadeadas em arquivo binário.
-O programa não possui interface gráfica e foi desenvolvido na linguagem C.
+# Gerenciador de Estoque da Biblioteca (T1 - AED 2024)
 
-Autores:
-Hugo Gustavo Cordeiro e Diogo Ferreira Ribeiro.
+Descrição
+---------
+Gerenciador de estoques de uma biblioteca implementado em C usando listas ligadas (linked lists). Este projeto foi desenvolvido como Trabalho 1 da disciplina de Algoritmos e Estruturas de Dados (AED) e possui operações básicas para gerenciar registros de livros: inserir, remover, pesquisar, listar e persistir em arquivo.
 
-Funcionalidades do Programa: 
-Cadastrar Livro:
-• Descrição: Permite ao usuário cadastrar um novo livro no 
-sistema. O usuário informa o título, autor, ano de publicação e 
-código de identificação do livro. As informações são 
-armazenadas temporariamente e, posteriormente, 
-gravadas no arquivo binário.
+Linguagem
+---------
+- C (100%)
 
-Remover Livro:
-• Descrição: Remove um livro do cadastro com base no código de 
-identificação fornecido pelo usuário. A função localiza o livro 
-correspondente na lista encadeada, remove o nó correspondente 
-e atualiza o cabeçalho do arquivo binário para refletir a remoção.
+Funcionalidades
+---------------
+- Inserir novo livro
+- Remover livro por identificador (ex.: ISBN ou ID)
+- Buscar livro por título, autor ou ISBN
+- Listar todos os livros em estoque
+- Atualizar quantidade em estoque
+- Carregar e salvar o catálogo em arquivo texto
+- Estrutura principal: lista ligada simples (Linked List)
 
-Listar Todos os Livros:
-• Descrição: Exibe todos os livros cadastrados no sistema. A lista 
-encadeada é percorrida e as informações de cada livro são 
-apresentadas ao usuário, incluindo título, autor, ano de 
-publicação e código de identificação.
+Formato de dados (arquivo)
+--------------------------
+Arquivo texto com um registro por linha. Exemplo de formato (um formato sugerido):
+ISBN;TÍTULO;AUTOR;QUANTIDADE
+Exemplo:
+978-1234567890;Estruturas de Dados em C;João Silva;3
 
-Buscar Livro por Título:
-• Descrição: Permite ao usuário buscar livros no sistema utilizando 
-o título como critério. A função percorre a lista encadeada no arquivo binário e exibe 
-as informações de todos os livros cujo título corresponde ao 
-termo de busca.
+Estrutura do repositório
+------------------------
+- src/        — código-fonte em C
+- include/    — headers (separados, caso existam)
+- data/       — arquivos de exemplo / base de dados (opcional)
+- bin/        — executáveis gerados (opcional)
+- README.md   — este arquivo
 
-Buscar Livro por Autor:
-• Descrição: Realiza a busca de livros no sistema utilizando o 
-nome do autor. A função percorre a lista encadeada e exibe as 
-informações dos livros cadastrados que correspondem ao autor 
-informado.
+Compilação
+----------
+Compilação simples com gcc:
+gcc -Wall -Wextra -pedantic -std=c11 -Iinclude -o bin/gerenciador src/*.c
 
-Contar Total de Livros:
-• Descrição: Calcula e exibe o número total de livros cadastrados 
-no sistema. A função percorre a lista encadeada, conta os nós 
-existentes e exibe o total de livros ao usuário.
+Ou, se houver Makefile:
+make
+(make cria `bin/gerenciador`)
 
-Carregar Dados de Arquivo:
-• Descrição: Carrega os dados de livros de um arquivo texto de entrada formatado, 
-e (caso não exista) cria um arquivo binário
-para serem armazenados os dados desses livros.
+Execução
+--------
+- Carregar um arquivo de dados existente (ex.: data/catalogo.txt) ao iniciar (se implementado).
+- Exemplo:
+./bin/gerenciador data/catalogo.txt
 
-Imprimir Posições Livres:
-• Descrição: Lista as posições livres no arquivo binário para serem reaproveitadas caso
-haja alguma inserção. Se não há posições livres, a função indicará "-1" representando o "topo" do arquivo, ou seja, será criado um novo registro para a próxima inserção.
+Uso (menu interativo)
+---------------------
+O programa normalmente apresenta um menu com opções como:
+1. Inserir livro
+2. Remover livro (por ISBN/ID)
+3. Buscar livro (por título/autor/ISBN)
+4. Listar todos os livros
+5. Salvar catálogo em arquivo
+6. Carregar catálogo de arquivo
+7. Sair
 
-Sair do Programa:
-• Descrição: Finaliza a execução do programa. Antes de sair, a 
-função pode salvar automaticamente os dados dos livros em um 
-arquivo binário para garantir que nenhuma informação seja 
-perdida.
+Exemplo de interação
+--------------------
+- Inserir:
+  - Informe ISBN, título, autor e quantidade
+- Buscar:
+  - Informe campo de busca (ex.: título) e termo
+- Salvar:
+  - Informe nome do arquivo (ex.: data/catalogo.txt)
+
+Design de dados
+---------------
+- Cada nó da lista representa um registro de livro (ISBN, título, autor, quantidade).
+- Lista ligada simples para facilitar inserções e remoções dinâmicas.
+- Funções recomendadas:
+  - create_node(...)
+  - insert_head/insert_sorted(...)
+  - remove_by_isbn(...)
+  - find_by_title(...)
+  - list_all(...)
+  - load_from_file(...)
+  - save_to_file(...)
+  - free_list(...)
+
+Boas práticas e recomendações
+----------------------------
+- Validar entradas do usuário (tamanho de strings, números negativos).
+- Tratar corretamente a alocação e liberação de memória (malloc/free).
+- Evitar overflow de buffers usando fgets e limites de tamanho.
+- Usar módulos separados (arquivo .c e .h) para organização do código.
+
+Testes e arquivos de exemplo
+---------------------------
+Inclua alguns arquivos em data/ para facilitar testes (ex.: data/sample.txt). Exemplo de conteúdo:
+978-1234567890;Estruturas de Dados em C;João Silva;3
+978-0987654321;Algoritmos e Prática;Maria Souza;5
+
+Autor
+-----
+ugoincc — Repositório: ugoincc/t1-aed-2024
